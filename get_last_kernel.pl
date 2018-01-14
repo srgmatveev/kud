@@ -5,3 +5,4 @@ use strict;
 use feature qw(say);
 
 say "hello";
+say "hello_branch";

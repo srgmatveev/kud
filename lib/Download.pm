@@ -8,18 +8,17 @@ use feature qw(say);
 use LWP::UserAgent;
 use HTML::TokeParser;
 
-use Data::Dumper;
-
-
 sub new {
+
     my $class = shift;
     my $url = shift;
-    my $self = { URL => $url , link_path => "", link_file_name => ""};
+    my $self = { URL => $url , link_path => "", link_file_name => "",};
     bless $self, $class;
 }
 
 
 sub get_file {
+
     my $class = shift;
     my $conn = LWP::UserAgent->new();
     
@@ -30,8 +29,7 @@ sub get_file {
 
     my $ref_func = \&get_url($class, $response->content);
     fill_path_from_get_link($class,$$ref_func);
-    say $class->{link_path};
-    say $class->{link_file_name};
+    
 }
 
 sub get_url {
@@ -59,13 +57,27 @@ sub get_url {
 }
 
 sub fill_path_from_get_link() {
+
     my $class = shift;
     my $m_path = shift;
+
     if(defined($m_path))
     {
 	$class->{link_path} = $m_path;
 	$class->{link_file_name} = (split(/\//, $m_path))[-1];
     }
+}
+
+sub get_link_path($) {
+
+    my $class = shift;
+    return $class->{link_path};
+}
+
+sub get_link_file_name($) {
+
+    my $class = shift;
+    return $class->{link_file_name};
 }
 
 1;

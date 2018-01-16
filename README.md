@@ -1,2 +1,2 @@
 # kud
-get stable kernel archive from kernel.org
+Get the last stable kernel archive from kernel.org

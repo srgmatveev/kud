@@ -7,12 +7,13 @@ use feature qw(say);
 
 use LWP::UserAgent;
 use HTML::TokeParser;
+use Encode;
 
 sub new {
 
     my $class = shift;
     my $url = shift;
-    my $self = { URL => $url , link_path => "", link_file_name => "",};
+    my $self = { URL => $url , link_path => "", link_file_name => "", charset => "utf8"};
     bless $self, $class;
 }
 
@@ -36,7 +37,7 @@ sub get_url {
 
     my $class = shift;
     my $ref_content = shift;
-    
+    $ref_content = decode($class->{charset}, $ref_content);
     my $p = HTML::TokeParser->new(\$ref_content) or
       die "Can't get page content: $!";
 
